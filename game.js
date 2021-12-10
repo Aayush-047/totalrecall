@@ -18,12 +18,20 @@ function nextseq()
 
 }
 
-$(".btn").click(function(){
+$(".btn").click(function(e){
+  e.stopPropagation();
   var userChosenColour = $(this).attr('id');
   userClickedPattern.push(userChosenColour);
   playSound(userChosenColour);
   animatePress(userChosenColour);
   checkAnswer(userClickedPattern.length-1);
+});
+$("body").click(function() {
+  if(started===false){
+  $("#level-title").text("Level " + level);
+  nextseq();
+  started=true;
+  }
 });
 
 function playSound(name)
